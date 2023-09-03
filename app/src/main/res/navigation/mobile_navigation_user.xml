@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.fyp_proj.User.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/user_fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.fyp_proj.User.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/user_fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_Orders"
+        android:name="com.example.fyp_proj.User.ui.order.OrdersFragment"
+        android:label="Orders"
+        tools:layout="@layout/user_fragment_orders" />
+
+    <fragment
+        android:id="@+id/nav_past"
+        android:name="com.example.fyp_proj.User.ui.past.PastFragment"
+        android:label="Past Orders"
+        tools:layout="@layout/user_fragment_past" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.fyp_proj.User.ui.logout.LogoutFragment"
+        android:label="Logout"
+        tools:layout="@layout/user_fragment_logout" />
+</navigation>

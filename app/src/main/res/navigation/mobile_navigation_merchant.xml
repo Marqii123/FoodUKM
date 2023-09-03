@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.fyp_proj.Merchant.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/merchant_fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.fyp_proj.Merchant.ui.Profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/merchant_fragment_profile" />
+    <fragment
+        android:id="@+id/nav_custOrders"
+        android:name="com.example.fyp_proj.Merchant.ui.Orders.CustOrdersFragment"
+        android:label="Orders"
+        tools:layout="@layout/merchant_fragment_cust_orders" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.fyp_proj.Merchant.ui.Logout.SlideshowFragment"
+        android:label="Logout"
+        tools:layout="@layout/merchant_fragment_logout" />
+</navigation>

@@ -1,0 +1,146 @@
+package com.example.fyp_proj.User.ui.past;
+
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.fyp_proj.CartData;
+import com.example.fyp_proj.Merchant.ui.AddMenu.MenuData;
+import com.example.fyp_proj.R;
+import com.example.fyp_proj.User.ui.order.OrdersAdapter;
+import com.example.fyp_proj.User.ui.order.OrdersFragment;
+import com.example.fyp_proj.UserData;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+
+
+public class PastFragment extends Fragment implements PastAdapter.OnItemClickListener{
+    RecyclerView recyclerView;
+    DatabaseReference databaseReference, dbref;
+    FirebaseUser user;
+    FirebaseAuth auth;
+    ArrayList<CartData> list;
+    PastAdapter adapter;
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        View root = inflater.inflate(R.layout.user_fragment_past, container, false);
+
+        recyclerView = root.findViewById(R.id.past_recyc);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        dbref = FirebaseDatabase.getInstance().getReference("Customer");
+
+        list = new ArrayList<>();
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+
+        ClearData();
+        getUserData();
+
+        return root;
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        CartData selectedItem = list.get(position);
+        final String selectedkey = selectedItem.getMkey();
+
+        databaseReference.child("Payment").child(selectedkey).removeValue();
+        Toast.makeText(getActivity(), "Removed Sucessfully!", Toast.LENGTH_SHORT).show();
+    }
+    private void ClearData(){
+        if(list != null){
+            list.clear();
+
+            if(adapter != null){
+                adapter.notifyDataSetChanged();
+            }
+        }
+        list = new ArrayList<>();
+    }
+    public void getUserData(){
+        Query query =dbref.child(user.getUid());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserData userData = new UserData();
+                userData.setName(snapshot.child("name").getValue().toString());
+
+                String name = userData.getName();
+
+
+
+                Query query = databaseReference.child("Payment").orderByChild("statusCust").equalTo(name+"Received");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ClearData();
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                            CartData cartData = new CartData();
+
+                            cartData.setMerchname(dataSnapshot.child("merchname").getValue().toString());
+                            cartData.setName(dataSnapshot.child("name").getValue().toString());
+                            cartData.setPrice(dataSnapshot.child("price").getValue().toString());
+                            cartData.setStatus(dataSnapshot.child("status").getValue().toString());
+                            cartData.setStatusCust(dataSnapshot.child("statusCust").getValue().toString());
+                            cartData.setFood(dataSnapshot.child("food").getValue().toString());
+                            cartData.setMkey(dataSnapshot.getKey());
+
+                            list.add(cartData);
+                        }
+                        adapter = new PastAdapter(getActivity(), list);
+                        recyclerView.setAdapter(adapter);
+
+                        adapter.setOnItemClickListener(PastFragment.this);
+
+                        adapter.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+}

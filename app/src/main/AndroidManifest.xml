@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/applogo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FYP_Proj"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".User.ui.profile.EditProfileCust"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Merchant.ui.Profile.EditProfile"
+            android:exported="false"
+            android:label="@string/title_activity_edit_profile"
+            android:resizeableActivity="true"
+            android:theme="@style/Theme.FYP_Proj.NoActionBar"
+            tools:targetApi="24">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Merchant.ui.AddMenu.EditMenuActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Merchant.ui.Orders.OrdersDetails"
+            android:exported="false"
+            android:parentActivityName=".User.MainActivity_user"
+            android:theme="@style/Theme.FYP_Proj2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".User.ui.Status.Status"
+            android:exported="false"
+            android:parentActivityName=".User.MainActivity_user"
+            android:theme="@style/Theme.FYP_Proj2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".User.ui.Payment.Payment"
+            android:exported="false"
+            android:parentActivityName=".User.MainActivity_user"
+            android:theme="@style/Theme.FYP_Proj2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".User.ui.Cart.Cart"
+            android:exported="false"
+            android:parentActivityName=".User.MainActivity_user"
+            android:theme="@style/Theme.FYP_Proj2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".User.ui.MenuDetails.MenuDetails"
+            android:exported="false"
+            android:parentActivityName=".User.MainActivity_user"
+            android:theme="@style/Theme.FYP_Proj2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Merchant.ui.AddMenu.CreateMenu"
+            android:exported="false"
+            android:parentActivityName=".Merchant.testnavdrawer"
+            android:theme="@style/Theme.FYP_Proj2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".User.MainActivity_user"
+            android:exported="false"
+            android:label="MainActivity_user"
+            android:theme="@style/Theme.FYP_Proj.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Merchant.testnavdrawer"
+            android:exported="false"
+            android:label="@string/title_activity_testnavdrawer"
+            android:theme="@style/Theme.FYP_Proj_merch.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Login"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".User.MainUser"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Merchant.MainMerchant"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".splashscreen"
+            android:exported="true"
+            android:theme="@style/Theme.FYP_Proj.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Register"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
